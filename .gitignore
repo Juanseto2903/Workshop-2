@@ -1,0 +1,7 @@
+.env
+.venv/
+logs/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+gx/uncommitted/
