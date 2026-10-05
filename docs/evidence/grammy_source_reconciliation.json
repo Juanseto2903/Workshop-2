@@ -1,0 +1,9 @@
+{
+  "executed_at_utc": "2026-10-05T22:13:46.550172+00:00",
+  "source_file": "the_grammy_awards.csv",
+  "source_sha256": "bae3d6613cb39adb597bb8864fb294144bd55cb452557536f324020266727d88",
+  "csv_data_rows": 4810,
+  "table_rows": 4810,
+  "winner_true_rows": 4810,
+  "reconciled": true
+}
