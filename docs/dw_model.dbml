@@ -1,0 +1,72 @@
+Table Dim_Grammy_Recognition {
+  recognition_key integer [primary key]
+  recognition_group varchar(20) [not null, note: 'Grammy / No-Grammy']
+  artist_grammy_wins_range varchar(10) [not null, note: '0, 1, 2-4, 5+ (highest win count among the track artists)']
+  wins_range_order integer [not null, note: 'Sort order of the band']
+
+  indexes {
+    (recognition_group, artist_grammy_wins_range) [unique]
+  }
+}
+
+Table Dim_Popularity_Tier {
+  popularity_tier_key integer [primary key]
+  tier_name varchar(20) [not null, unique, note: 'Most popular / Rest']
+  tier_order integer [not null]
+}
+
+Table Dim_Genre {
+  genre_key integer [primary key]
+  genre_name varchar(60) [not null, unique, note: 'Spotify track_genre']
+}
+
+Table Dim_Grammy_Category {
+  category_key integer [primary key]
+  category_name varchar(300) [not null, unique, note: 'Normalized Grammy category']
+  category_group varchar(40) [not null, note: 'Derived field (Pop, Rock, ...) or Other']
+}
+
+Table Fact_Track {
+  track_key integer [primary key]
+  recognition_key integer [not null]
+  popularity_tier_key integer [not null]
+  track_id varchar(22) [not null, unique, note: 'Spotify business key (degenerate)']
+  track_name varchar(500) [note: 'Degenerate']
+  album_name varchar(500) [note: 'Degenerate']
+  popularity decimal(5,2) [not null, note: 'Range 0-100; mean when the source repeats the track']
+  duration_ms integer [not null, note: 'Greater than 0']
+  danceability float [not null, note: 'Range 0-1']
+  energy float [not null, note: 'Range 0-1']
+  valence float [not null, note: 'Range 0-1']
+  acousticness float [not null, note: 'Range 0-1']
+  loudness float [not null, note: 'dB']
+  tempo float [note: 'BPM; NULL when the source value is 0']
+  explicit_flag integer [not null, note: '1 = explicit, 0 = not explicit']
+  track_count integer [not null, note: 'Degenerate measure, always 1']
+}
+
+Table Bridge_Track_Genre {
+  track_key integer [not null]
+  genre_key integer [not null]
+
+  indexes {
+    (track_key, genre_key) [pk]
+  }
+}
+
+Table Bridge_Track_Grammy_Category {
+  track_key integer [not null]
+  category_key integer [not null]
+  grammy_wins integer [not null, note: 'Grammy records of the track artists in this category']
+
+  indexes {
+    (track_key, category_key) [pk]
+  }
+}
+
+Ref: Fact_Track.recognition_key > Dim_Grammy_Recognition.recognition_key
+Ref: Fact_Track.popularity_tier_key > Dim_Popularity_Tier.popularity_tier_key
+Ref: Bridge_Track_Genre.track_key > Fact_Track.track_key
+Ref: Bridge_Track_Genre.genre_key > Dim_Genre.genre_key
+Ref: Bridge_Track_Grammy_Category.track_key > Fact_Track.track_key
+Ref: Bridge_Track_Grammy_Category.category_key > Dim_Grammy_Category.category_key
