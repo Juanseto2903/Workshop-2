@@ -1,0 +1,12 @@
+,dtype,non_null,n_unique
+grammy_id,int64,4810,4810
+year,int64,4810,62
+title,str,4810,62
+published_at,"datetime64[us, UTC]",4810,4
+updated_at,"datetime64[us, UTC]",4810,10
+category,str,4810,638
+nominee,str,4804,4131
+artist,str,2970,1658
+workers,str,2620,2366
+img,str,3443,1463
+winner,bool,4810,1

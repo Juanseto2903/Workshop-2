@@ -1,0 +1,22 @@
+,dtype,non_null,n_unique
+Unnamed: 0,int64,114000,114000
+track_id,str,114000,89741
+artists,str,113999,31437
+album_name,str,113999,46589
+track_name,str,113999,73608
+popularity,int64,114000,101
+duration_ms,int64,114000,50697
+explicit,bool,114000,2
+danceability,float64,114000,1174
+energy,float64,114000,2083
+key,int64,114000,12
+loudness,float64,114000,19480
+mode,int64,114000,2
+speechiness,float64,114000,1489
+acousticness,float64,114000,5061
+instrumentalness,float64,114000,5346
+liveness,float64,114000,1722
+valence,float64,114000,1790
+tempo,float64,114000,45653
+time_signature,int64,114000,5
+track_genre,str,114000,114
