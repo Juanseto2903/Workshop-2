@@ -1,0 +1,44 @@
+rule_id,severity,gate,suite,expectation_type,target,parameters,dimension,requirement
+DQ-01,Critical,spotify_raw,spotify_raw_suite,expect_table_columns_to_match_set,(table),column_set=[14 values]; exact_match=False,"Validity, completeness",AR-01 to 03
+DQ-01,Critical,spotify_raw,spotify_raw_suite,expect_table_row_count_to_be_between,(table),min_value=102600,"Validity, completeness",AR-01 to 03
+DQ-02,Critical,spotify_raw,spotify_raw_suite,expect_column_values_to_be_between,popularity,min_value=0; max_value=100,Validity,"AR-01, AR-02"
+DQ-02,Critical,spotify_raw,spotify_raw_suite,expect_column_values_to_be_between,danceability,min_value=0; max_value=1,Validity,"AR-01, AR-02"
+DQ-02,Critical,spotify_raw,spotify_raw_suite,expect_column_values_to_be_between,energy,min_value=0; max_value=1,Validity,"AR-01, AR-02"
+DQ-02,Critical,spotify_raw,spotify_raw_suite,expect_column_values_to_be_between,valence,min_value=0; max_value=1,Validity,"AR-01, AR-02"
+DQ-02,Critical,spotify_raw,spotify_raw_suite,expect_column_values_to_be_between,acousticness,min_value=0; max_value=1,Validity,"AR-01, AR-02"
+DQ-03,Warning,spotify_raw,spotify_raw_suite,expect_column_values_to_not_be_null,artists,mostly=0.999,Completeness,AR-01 to 03
+DQ-04,Warning,spotify_raw,spotify_raw_suite,expect_compound_columns_to_be_unique,"track_id, track_genre",mostly=0.99,Uniqueness,AR-01 to 03
+DQ-05,Warning,spotify_raw,spotify_raw_suite,expect_column_values_to_not_be_in_set,popularity,value_set=[0]; mostly=0.8,Validity,AR-01
+DQ-06,Critical,grammys_raw,grammys_raw_suite,expect_table_columns_to_match_set,(table),"column_set=['year', 'category', 'artist', 'winner']; exact_match=False","Validity, completeness",AR-01 to 03
+DQ-06,Critical,grammys_raw,grammys_raw_suite,expect_table_row_count_to_be_between,(table),min_value=4329,"Validity, completeness",AR-01 to 03
+DQ-07,Critical,grammys_raw,grammys_raw_suite,expect_column_values_to_not_be_null,winner,,Validity,AR-01 to 03
+DQ-07,Critical,grammys_raw,grammys_raw_suite,expect_column_values_to_be_in_set,winner,value_set=[True],Validity,AR-01 to 03
+DQ-08,Warning,grammys_raw,grammys_raw_suite,expect_column_values_to_not_be_null,artist,mostly=0.5,Completeness,AR-01 to 03
+DQ-09,Critical,prepared,prepared_tracks_suite,expect_column_values_to_not_be_null,track_id,,Uniqueness,AR-01 to 03
+DQ-09,Critical,prepared,prepared_tracks_suite,expect_column_values_to_be_unique,track_id,,Uniqueness,AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_table_columns_to_match_set,(table),column_set=[17 values]; exact_match=False,"Validity, consistency",AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_column_values_to_not_be_null,popularity,,"Validity, consistency",AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_column_values_to_not_be_null,duration_ms,,"Validity, consistency",AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_column_values_to_not_be_null,danceability,,"Validity, consistency",AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_column_values_to_not_be_null,energy,,"Validity, consistency",AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_column_values_to_not_be_null,valence,,"Validity, consistency",AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_column_values_to_not_be_null,acousticness,,"Validity, consistency",AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_column_values_to_not_be_null,explicit_flag,,"Validity, consistency",AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_column_values_to_not_be_null,track_count,,"Validity, consistency",AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_column_values_to_not_be_null,recognition_group,,"Validity, consistency",AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_column_values_to_not_be_null,artist_grammy_wins_range,,"Validity, consistency",AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_column_values_to_not_be_null,popularity_tier,,"Validity, consistency",AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_column_values_to_be_between,popularity,min_value=0; max_value=100,"Validity, consistency",AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_column_values_to_be_between,danceability,min_value=0; max_value=1,"Validity, consistency",AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_column_values_to_be_between,energy,min_value=0; max_value=1,"Validity, consistency",AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_column_values_to_be_between,valence,min_value=0; max_value=1,"Validity, consistency",AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_column_values_to_be_between,acousticness,min_value=0; max_value=1,"Validity, consistency",AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_column_values_to_be_between,duration_ms,min_value=1,"Validity, consistency",AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_column_values_to_be_between,tempo,min_value=0; strict_min=True,"Validity, consistency",AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_column_values_to_be_in_set,explicit_flag,"value_set=[0, 1]","Validity, consistency",AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_column_values_to_be_in_set,track_count,value_set=[1],"Validity, consistency",AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_column_values_to_be_in_set,popularity_tier,"value_set=['Most popular', 'Rest']","Validity, consistency",AR-01 to 03
+DQ-10,Critical,prepared,prepared_tracks_suite,expect_column_pair_values_to_be_in_set,recognition_group + artist_grammy_wins_range,"value_pairs_set=[['No-Grammy', '0'], ['Grammy', '1'], ['Grammy', '2-4'], ['Grammy', '5+']]","Validity, consistency",AR-01 to 03
+DQ-11,Warning,prepared,prepared_tracks_suite,expect_column_sum_to_be_between,is_grammy_track,min_value=1000,Completeness (analytical readiness),AR-01 to 03
+DQ-11,Warning,prepared,prepared_tracks_suite,expect_column_mean_to_be_between,is_grammy_track,min_value=0.02,Completeness (analytical readiness),AR-01 to 03
+DQ-12,Informational,prepared,grammy_artist_match_suite,expect_column_mean_to_be_between,matched_flag,min_value=0; max_value=1,Consistency,AR-01 to 03

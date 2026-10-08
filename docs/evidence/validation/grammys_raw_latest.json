@@ -1,0 +1,122 @@
+{
+  "gate": "grammys_raw",
+  "dag_task": "validate_grammys_raw",
+  "executed_at": "2026-10-08T06:21:19+00:00",
+  "datasets": {
+    "grammys_raw": {
+      "file": "grammys_raw.parquet",
+      "rows": 4810,
+      "columns": 11
+    }
+  },
+  "rules": [
+    {
+      "rule_id": "DQ-06",
+      "severity": "Critical",
+      "dimension": "Validity, completeness",
+      "description": "The required columns exist and the extraction is complete.",
+      "threshold": "All 4 columns present; rows of at least 4,329.",
+      "requirement": "AR-01 to 03",
+      "status": "PASS",
+      "checks": [
+        {
+          "rule_id": "DQ-06",
+          "expectation": "expect_table_columns_to_match_set",
+          "target": "(table)",
+          "success": true,
+          "observed": {
+            "observed_value": [
+              "artist",
+              "category",
+              "grammy_id",
+              "img",
+              "nominee",
+              "published_at",
+              "title",
+              "updated_at",
+              "winner",
+              "workers",
+              "year"
+            ]
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-06",
+          "expectation": "expect_table_row_count_to_be_between",
+          "target": "(table)",
+          "success": true,
+          "observed": {
+            "observed_value": 4810
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "rule_id": "DQ-07",
+      "severity": "Critical",
+      "dimension": "Validity",
+      "description": "Every record represents a Grammy win.",
+      "threshold": "100% TRUE.",
+      "requirement": "AR-01 to 03",
+      "status": "PASS",
+      "checks": [
+        {
+          "rule_id": "DQ-07",
+          "expectation": "expect_column_values_to_not_be_null",
+          "target": "winner",
+          "success": true,
+          "observed": {
+            "element_count": 4810,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-07",
+          "expectation": "expect_column_values_to_be_in_set",
+          "target": "winner",
+          "success": true,
+          "observed": {
+            "element_count": 4810,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0,
+            "unexpected_percent_total": 0.0,
+            "unexpected_percent_nonmissing": 0.0,
+            "missing_count": 0,
+            "missing_percent": 0.0
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "rule_id": "DQ-08",
+      "severity": "Warning",
+      "dimension": "Completeness",
+      "description": "The artist is present for enough records.",
+      "threshold": "At least 50% non-null.",
+      "requirement": "AR-01 to 03",
+      "status": "PASS",
+      "checks": [
+        {
+          "rule_id": "DQ-08",
+          "expectation": "expect_column_values_to_not_be_null",
+          "target": "artist",
+          "success": true,
+          "observed": {
+            "element_count": 4810,
+            "unexpected_count": 1840,
+            "unexpected_percent": 38.25363825363826
+          },
+          "error": null
+        }
+      ]
+    }
+  ],
+  "gate_passed": true,
+  "blocking_rules": [],
+  "warning_rules": []
+}

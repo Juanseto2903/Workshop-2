@@ -1,0 +1,452 @@
+{
+  "expectations": [
+    {
+      "id": "65aa9bd4-b42f-4c66-b01f-5148215fa204",
+      "kwargs": {
+        "column": "track_id"
+      },
+      "meta": {
+        "dimension": "Uniqueness",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-09",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "a737434b-b6ad-4309-a0b4-18228f956445",
+      "kwargs": {
+        "column": "track_id"
+      },
+      "meta": {
+        "dimension": "Uniqueness",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-09",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_be_unique"
+    },
+    {
+      "id": "7bc66576-2e93-409f-8855-bdc59ce5c0d8",
+      "kwargs": {
+        "column_set": [
+          "track_id",
+          "track_name",
+          "album_name",
+          "popularity",
+          "duration_ms",
+          "danceability",
+          "energy",
+          "valence",
+          "acousticness",
+          "loudness",
+          "tempo",
+          "explicit_flag",
+          "track_count",
+          "recognition_group",
+          "artist_grammy_wins_range",
+          "popularity_tier",
+          "is_grammy_track"
+        ],
+        "exact_match": false
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_table_columns_to_match_set"
+    },
+    {
+      "id": "ce5c650d-44fb-459c-b325-9f7a576d3594",
+      "kwargs": {
+        "column": "popularity"
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "2552d0b9-6f15-4c0b-8682-0d116a94adab",
+      "kwargs": {
+        "column": "duration_ms"
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "9c7bf752-b025-4c63-be5e-a47d26f25bd6",
+      "kwargs": {
+        "column": "danceability"
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "ad500336-a134-4f72-9008-659c5a8cb0c4",
+      "kwargs": {
+        "column": "energy"
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "d9e1d73e-17c7-459c-8816-815d021b03d3",
+      "kwargs": {
+        "column": "valence"
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "78dde24d-e760-47b5-bdca-8fb2b083a4d3",
+      "kwargs": {
+        "column": "acousticness"
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "04e21951-de19-4ea7-84a9-178a371bada0",
+      "kwargs": {
+        "column": "explicit_flag"
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "9596fa5d-4ec8-4b21-be4f-81d2b5de4e85",
+      "kwargs": {
+        "column": "track_count"
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "794a6aea-73d9-47d7-bf9e-87394288a9cf",
+      "kwargs": {
+        "column": "recognition_group"
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "535a872e-0ec0-4ef0-a4b3-cdf4dfe18d12",
+      "kwargs": {
+        "column": "artist_grammy_wins_range"
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "162cff1a-99a4-4e90-957f-f7fe02cd54c0",
+      "kwargs": {
+        "column": "popularity_tier"
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "99479ced-291a-4095-868b-aad230fe1aa6",
+      "kwargs": {
+        "column": "popularity",
+        "max_value": 100.0,
+        "min_value": 0.0
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "aa479ec1-55b9-4864-b41f-5d16d727cc69",
+      "kwargs": {
+        "column": "danceability",
+        "max_value": 1.0,
+        "min_value": 0.0
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "3a6d1a32-eeff-492b-b242-3a7675957198",
+      "kwargs": {
+        "column": "energy",
+        "max_value": 1.0,
+        "min_value": 0.0
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "7034a394-1007-47e5-ae6e-b0fd75fd261d",
+      "kwargs": {
+        "column": "valence",
+        "max_value": 1.0,
+        "min_value": 0.0
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "ff6825d1-337e-46d1-9877-d13862f8d25b",
+      "kwargs": {
+        "column": "acousticness",
+        "max_value": 1.0,
+        "min_value": 0.0
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "596c796e-c1b5-426b-91b3-fd9bcc064e16",
+      "kwargs": {
+        "column": "duration_ms",
+        "min_value": 1.0
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "73e2f72c-4104-4670-9d77-2305a621f1b9",
+      "kwargs": {
+        "column": "tempo",
+        "min_value": 0.0,
+        "strict_min": true
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "6f6aadba-764e-4e21-9bd8-193b479a4849",
+      "kwargs": {
+        "column": "explicit_flag",
+        "value_set": [
+          0,
+          1
+        ]
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_be_in_set"
+    },
+    {
+      "id": "310007ac-7a5b-4198-9d4b-9d1038b1ed16",
+      "kwargs": {
+        "column": "track_count",
+        "value_set": [
+          1
+        ]
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_be_in_set"
+    },
+    {
+      "id": "b48c5205-a90a-4b8b-91f6-64aeea220ee2",
+      "kwargs": {
+        "column": "popularity_tier",
+        "value_set": [
+          "Most popular",
+          "Rest"
+        ]
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_be_in_set"
+    },
+    {
+      "id": "3ca9811f-591e-4c89-8351-ca3154994483",
+      "kwargs": {
+        "column_A": "recognition_group",
+        "column_B": "artist_grammy_wins_range",
+        "value_pairs_set": [
+          [
+            "No-Grammy",
+            "0"
+          ],
+          [
+            "Grammy",
+            "1"
+          ],
+          [
+            "Grammy",
+            "2-4"
+          ],
+          [
+            "Grammy",
+            "5+"
+          ]
+        ]
+      },
+      "meta": {
+        "dimension": "Validity, consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-10",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_pair_values_to_be_in_set"
+    },
+    {
+      "id": "6c963475-79f4-4699-83a4-01dedcea610e",
+      "kwargs": {
+        "column": "is_grammy_track",
+        "min_value": 1000.0
+      },
+      "meta": {
+        "dimension": "Completeness (analytical readiness)",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-11",
+        "severity": "Warning"
+      },
+      "severity": "critical",
+      "type": "expect_column_sum_to_be_between"
+    },
+    {
+      "id": "939cd707-0751-4e06-9ade-939fdc37200b",
+      "kwargs": {
+        "column": "is_grammy_track",
+        "min_value": 0.02
+      },
+      "meta": {
+        "dimension": "Completeness (analytical readiness)",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-11",
+        "severity": "Warning"
+      },
+      "severity": "critical",
+      "type": "expect_column_mean_to_be_between"
+    }
+  ],
+  "id": "b334cf03-ca19-430a-a6cb-e4b2c95b0a1f",
+  "meta": {
+    "great_expectations_version": "1.23.2"
+  },
+  "name": "prepared_tracks_suite",
+  "notes": null
+}

@@ -1,0 +1,90 @@
+{
+  "expectations": [
+    {
+      "id": "a53107c0-a5c5-4c3b-81e5-c80cdd96f745",
+      "kwargs": {
+        "column_set": [
+          "year",
+          "category",
+          "artist",
+          "winner"
+        ],
+        "exact_match": false
+      },
+      "meta": {
+        "dimension": "Validity, completeness",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-06",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_table_columns_to_match_set"
+    },
+    {
+      "id": "d4d398ec-6079-418a-add8-b095bc375fc9",
+      "kwargs": {
+        "min_value": 4329
+      },
+      "meta": {
+        "dimension": "Validity, completeness",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-06",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_table_row_count_to_be_between"
+    },
+    {
+      "id": "bedfd588-fb64-4746-815b-49d9f48beb13",
+      "kwargs": {
+        "column": "winner"
+      },
+      "meta": {
+        "dimension": "Validity",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-07",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "747ecea6-d56e-462d-b30d-4f8ab51c6db5",
+      "kwargs": {
+        "column": "winner",
+        "value_set": [
+          true
+        ]
+      },
+      "meta": {
+        "dimension": "Validity",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-07",
+        "severity": "Critical"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_be_in_set"
+    },
+    {
+      "id": "963141f6-f362-47d8-ad76-9e154b4afa46",
+      "kwargs": {
+        "column": "artist",
+        "mostly": 0.5
+      },
+      "meta": {
+        "dimension": "Completeness",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-08",
+        "severity": "Warning"
+      },
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    }
+  ],
+  "id": "ee8d7fd0-9f11-4ecf-a35a-4323c77f4241",
+  "meta": {
+    "great_expectations_version": "1.23.2"
+  },
+  "name": "grammys_raw_suite",
+  "notes": null
+}

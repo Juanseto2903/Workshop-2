@@ -1,0 +1,20 @@
+{
+  "actions": [
+    {
+      "name": "update_data_docs",
+      "site_names": [],
+      "type": "update_data_docs"
+    }
+  ],
+  "id": "28cccf88-7547-4f25-a11b-6fadc581a8ba",
+  "name": "grammy_artist_match_checkpoint",
+  "result_format": {
+    "result_format": "SUMMARY"
+  },
+  "validation_definitions": [
+    {
+      "id": "238edf2d-0657-4db6-bceb-f88c0d9d37e6",
+      "name": "grammy_artist_match_validation"
+    }
+  ]
+}

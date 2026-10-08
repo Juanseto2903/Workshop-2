@@ -90,12 +90,15 @@ x-airflow-common:
     - ${AIRFLOW_PROJ_DIR:-.}/gx:/opt/airflow/gx
     - ${AIRFLOW_PROJ_DIR:-.}/data:/opt/airflow/data
     - ${AIRFLOW_PROJ_DIR:-.}/sql:/opt/airflow/sql
+    - ${AIRFLOW_PROJ_DIR:-.}/docs:/opt/airflow/docs
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends-on
     redis:
       condition: service_healthy
     postgres:
+      condition: service_healthy
+    warehouse-db:
       condition: service_healthy
 
 services:

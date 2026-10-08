@@ -1,0 +1,26 @@
+{
+  "expectations": [
+    {
+      "id": "d4fc7e50-4d9b-41f1-a448-378aa689bf3f",
+      "kwargs": {
+        "column": "matched_flag",
+        "max_value": 1.0,
+        "min_value": 0.0
+      },
+      "meta": {
+        "dimension": "Consistency",
+        "requirement": "AR-01 to 03",
+        "rule_id": "DQ-12",
+        "severity": "Informational"
+      },
+      "severity": "critical",
+      "type": "expect_column_mean_to_be_between"
+    }
+  ],
+  "id": "1e0b122f-24f7-4601-8e50-51ec2a58a368",
+  "meta": {
+    "great_expectations_version": "1.23.2"
+  },
+  "name": "grammy_artist_match_suite",
+  "notes": null
+}

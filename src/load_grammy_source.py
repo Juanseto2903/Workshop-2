@@ -44,8 +44,10 @@ def main() -> None:
     csv_rows = count_csv_rows(CSV_PATH)
 
     conn = psycopg2.connect(
-        host=os.getenv("GRAMMY_DB_HOST", "localhost"),
-        port=int(os.getenv("GRAMMY_DB_PORT", "5433")),
+        #host=os.getenv("GRAMMY_DB_HOST", "localhost"),
+        #port=int(os.getenv("GRAMMY_DB_PORT", "5433")),
+        host=os.getenv("WH_HOST", "localhost"),
+        port=int(os.getenv("WH_PORT", "5433")),
         user=os.environ["WH_USER"],
         password=os.environ["WH_PASSWORD"],
         dbname="grammy_source",

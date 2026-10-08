@@ -1,0 +1,22 @@
+{
+  "data": {
+    "asset": {
+      "id": "88f74805-462a-4ee1-a44b-0a10bb450a07",
+      "name": "grammys_raw"
+    },
+    "batch_definition": {
+      "id": "06510abf-5272-46ec-b0c0-58f6d962aebb",
+      "name": "whole_dataframe"
+    },
+    "datasource": {
+      "id": "286f26a2-f0d5-41fd-8713-cd2f15e0c94e",
+      "name": "staging_pandas"
+    }
+  },
+  "id": "3b93fe2f-83ea-4fc3-b1a1-f5bbc1fe2679",
+  "name": "grammys_raw_validation",
+  "suite": {
+    "id": "ee8d7fd0-9f11-4ecf-a35a-4323c77f4241",
+    "name": "grammys_raw_suite"
+  }
+}

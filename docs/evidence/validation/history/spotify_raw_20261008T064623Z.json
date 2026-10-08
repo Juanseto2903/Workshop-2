@@ -1,0 +1,240 @@
+{
+  "gate": "spotify_raw",
+  "dag_task": "validate_spotify_raw",
+  "executed_at": "2026-10-08T06:46:23+00:00",
+  "datasets": {
+    "spotify_raw": {
+      "file": "data\\staging_fail\\spotify_raw.parquet",
+      "rows": 114000,
+      "columns": 21
+    }
+  },
+  "rules": [
+    {
+      "rule_id": "DQ-01",
+      "severity": "Critical",
+      "dimension": "Validity, completeness",
+      "description": "The required columns exist and the extraction is not truncated.",
+      "threshold": "All 14 columns present; rows of at least 102,600.",
+      "requirement": "AR-01 to 03",
+      "status": "PASS",
+      "checks": [
+        {
+          "rule_id": "DQ-01",
+          "expectation": "expect_table_columns_to_match_set",
+          "target": "(table)",
+          "success": true,
+          "observed": {
+            "observed_value": [
+              "Unnamed: 0",
+              "acousticness",
+              "album_name",
+              "artists",
+              "danceability",
+              "duration_ms",
+              "energy",
+              "explicit",
+              "instrumentalness",
+              "key",
+              "liveness",
+              "loudness",
+              "mode",
+              "popularity",
+              "speechiness",
+              "tempo",
+              "time_signature",
+              "track_genre",
+              "track_id",
+              "track_name",
+              "valence"
+            ]
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-01",
+          "expectation": "expect_table_row_count_to_be_between",
+          "target": "(table)",
+          "success": true,
+          "observed": {
+            "observed_value": 114000
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "rule_id": "DQ-02",
+      "severity": "Critical",
+      "dimension": "Validity",
+      "description": "Numeric attributes respect the documented Spotify scales.",
+      "threshold": "popularity within 0-100 and the four features within 0-1, in 100% of rows.",
+      "requirement": "AR-01, AR-02",
+      "status": "FAIL",
+      "checks": [
+        {
+          "rule_id": "DQ-02",
+          "expectation": "expect_column_values_to_be_between",
+          "target": "popularity",
+          "success": false,
+          "observed": {
+            "element_count": 114000,
+            "unexpected_count": 100,
+            "unexpected_percent": 0.08771929824561403,
+            "unexpected_percent_total": 0.08771929824561403,
+            "unexpected_percent_nonmissing": 0.08771929824561403,
+            "missing_count": 0,
+            "missing_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-02",
+          "expectation": "expect_column_values_to_be_between",
+          "target": "danceability",
+          "success": true,
+          "observed": {
+            "element_count": 114000,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0,
+            "unexpected_percent_total": 0.0,
+            "unexpected_percent_nonmissing": 0.0,
+            "missing_count": 0,
+            "missing_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-02",
+          "expectation": "expect_column_values_to_be_between",
+          "target": "energy",
+          "success": true,
+          "observed": {
+            "element_count": 114000,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0,
+            "unexpected_percent_total": 0.0,
+            "unexpected_percent_nonmissing": 0.0,
+            "missing_count": 0,
+            "missing_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-02",
+          "expectation": "expect_column_values_to_be_between",
+          "target": "valence",
+          "success": true,
+          "observed": {
+            "element_count": 114000,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0,
+            "unexpected_percent_total": 0.0,
+            "unexpected_percent_nonmissing": 0.0,
+            "missing_count": 0,
+            "missing_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-02",
+          "expectation": "expect_column_values_to_be_between",
+          "target": "acousticness",
+          "success": true,
+          "observed": {
+            "element_count": 114000,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0,
+            "unexpected_percent_total": 0.0,
+            "unexpected_percent_nonmissing": 0.0,
+            "missing_count": 0,
+            "missing_percent": 0.0
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "rule_id": "DQ-03",
+      "severity": "Warning",
+      "dimension": "Completeness",
+      "description": "The artist is present.",
+      "threshold": "At least 99.9% non-null.",
+      "requirement": "AR-01 to 03",
+      "status": "PASS",
+      "checks": [
+        {
+          "rule_id": "DQ-03",
+          "expectation": "expect_column_values_to_not_be_null",
+          "target": "artists",
+          "success": true,
+          "observed": {
+            "element_count": 114000,
+            "unexpected_count": 1,
+            "unexpected_percent": 0.0008771929824561403
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "rule_id": "DQ-04",
+      "severity": "Warning",
+      "dimension": "Uniqueness",
+      "description": "The same track and genre pair is not repeated.",
+      "threshold": "At most 1% of rows duplicated.",
+      "requirement": "AR-01 to 03",
+      "status": "PASS",
+      "checks": [
+        {
+          "rule_id": "DQ-04",
+          "expectation": "expect_compound_columns_to_be_unique",
+          "target": "track_id, track_genre",
+          "success": true,
+          "observed": {
+            "element_count": 114000,
+            "unexpected_count": 894,
+            "unexpected_percent": 0.7842105263157895,
+            "unexpected_percent_total": 0.7842105263157895,
+            "unexpected_percent_nonmissing": 0.7842105263157895,
+            "missing_count": 0,
+            "missing_percent": 0.0
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "rule_id": "DQ-05",
+      "severity": "Warning",
+      "dimension": "Validity",
+      "description": "Popularity zero is not dominant.",
+      "threshold": "At most 20% of rows equal 0.",
+      "requirement": "AR-01",
+      "status": "PASS",
+      "checks": [
+        {
+          "rule_id": "DQ-05",
+          "expectation": "expect_column_values_to_not_be_in_set",
+          "target": "popularity",
+          "success": true,
+          "observed": {
+            "element_count": 114000,
+            "unexpected_count": 15977,
+            "unexpected_percent": 14.014912280701756,
+            "unexpected_percent_total": 14.014912280701756,
+            "unexpected_percent_nonmissing": 14.014912280701756,
+            "missing_count": 0,
+            "missing_percent": 0.0
+          },
+          "error": null
+        }
+      ]
+    }
+  ],
+  "gate_passed": false,
+  "blocking_rules": [
+    "DQ-02"
+  ],
+  "warning_rules": []
+}
