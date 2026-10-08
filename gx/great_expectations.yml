@@ -87,35 +87,35 @@ fluent_datasources:
     assets:
       spotify_raw:
         type: dataframe
-        id: f4c2380b-9131-43b2-b6a9-de7ae73d556c
+        id: fb5c9ce2-b74f-4806-a9ab-408f5abe4f64
         batch_metadata: {}
         batch_definitions:
           whole_dataframe:
-            id: 2c435d39-80ca-499f-9028-877d844b2a3d
+            id: 9fd5d686-e9d0-4a08-b8d0-ac5a0189afa7
             partitioner:
       grammys_raw:
         type: dataframe
-        id: 88f74805-462a-4ee1-a44b-0a10bb450a07
+        id: 64cbe8f6-1fd2-40c6-bc39-fb1473e4a17e
         batch_metadata: {}
         batch_definitions:
           whole_dataframe:
-            id: 06510abf-5272-46ec-b0c0-58f6d962aebb
+            id: 5cd66f9e-de46-4fce-b09d-bc715779e4e1
             partitioner:
       prepared_tracks:
         type: dataframe
-        id: be3a3bff-9059-4299-8e03-e2ead7dd16cb
+        id: 0bf17f46-a359-468e-9166-525f34c76ff4
         batch_metadata: {}
         batch_definitions:
           whole_dataframe:
-            id: 828f3198-f59d-40b3-8fc8-e7dd3b88a95d
+            id: 73fce5a9-82e4-4e71-907c-dd6a14cdbe78
             partitioner:
       grammy_artist_match:
         type: dataframe
-        id: 5d9616c1-0a54-446c-85d4-27f5c99a7010
+        id: 3c6a93e7-99d0-473b-8e82-1fa80df025e8
         batch_metadata: {}
         batch_definitions:
           whole_dataframe:
-            id: fa17913d-d491-4653-beea-15a10bc06297
+            id: 0c096db7-5669-4465-b2f6-a793fdd01943
             partitioner:
 analytics_enabled:
 data_context_id: 30ca30c6-43e8-4216-8f47-42b33abcfc5e

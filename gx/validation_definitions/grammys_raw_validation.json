@@ -1,11 +1,11 @@
 {
   "data": {
     "asset": {
-      "id": "88f74805-462a-4ee1-a44b-0a10bb450a07",
+      "id": "64cbe8f6-1fd2-40c6-bc39-fb1473e4a17e",
       "name": "grammys_raw"
     },
     "batch_definition": {
-      "id": "06510abf-5272-46ec-b0c0-58f6d962aebb",
+      "id": "5cd66f9e-de46-4fce-b09d-bc715779e4e1",
       "name": "whole_dataframe"
     },
     "datasource": {

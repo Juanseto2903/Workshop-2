@@ -1,0 +1,460 @@
+{
+  "gate": "prepared",
+  "dag_task": "validate_prepared",
+  "executed_at": "2026-10-08T18:10:18+00:00",
+  "datasets": {
+    "prepared_tracks": {
+      "file": "data\\staging\\prepared_tracks.parquet",
+      "rows": 89740,
+      "columns": 17
+    },
+    "grammy_artist_match": {
+      "file": "data\\staging\\grammy_artist_match.parquet",
+      "rows": 2291,
+      "columns": 2
+    }
+  },
+  "rules": [
+    {
+      "rule_id": "DQ-09",
+      "severity": "Critical",
+      "dimension": "Uniqueness",
+      "description": "There is one row per track.",
+      "threshold": "100% unique.",
+      "requirement": "AR-01 to 03",
+      "status": "PASS",
+      "checks": [
+        {
+          "rule_id": "DQ-09",
+          "expectation": "expect_column_values_to_not_be_null",
+          "target": "track_id",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-09",
+          "expectation": "expect_column_values_to_be_unique",
+          "target": "track_id",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0,
+            "unexpected_percent_total": 0.0,
+            "unexpected_percent_nonmissing": 0.0,
+            "missing_count": 0,
+            "missing_percent": 0.0
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "rule_id": "DQ-10",
+      "severity": "Critical",
+      "dimension": "Validity, consistency",
+      "description": "Required attributes exist, values respect the Data Warehouse domains, and the classification pair is one of the four valid combinations.",
+      "threshold": "100% of attributes present; 100% of rows within domains.",
+      "requirement": "AR-01 to 03",
+      "status": "PASS",
+      "checks": [
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_table_columns_to_match_set",
+          "target": "(table)",
+          "success": true,
+          "observed": {
+            "observed_value": [
+              "acousticness",
+              "album_name",
+              "artist_grammy_wins_range",
+              "danceability",
+              "duration_ms",
+              "energy",
+              "explicit_flag",
+              "is_grammy_track",
+              "loudness",
+              "popularity",
+              "popularity_tier",
+              "recognition_group",
+              "tempo",
+              "track_count",
+              "track_id",
+              "track_name",
+              "valence"
+            ]
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_column_pair_values_to_be_in_set",
+          "target": "recognition_group + artist_grammy_wins_range",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0,
+            "unexpected_percent_total": 0.0,
+            "unexpected_percent_nonmissing": 0.0,
+            "missing_count": 0,
+            "missing_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_column_values_to_not_be_null",
+          "target": "popularity",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_column_values_to_be_between",
+          "target": "popularity",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0,
+            "unexpected_percent_total": 0.0,
+            "unexpected_percent_nonmissing": 0.0,
+            "missing_count": 0,
+            "missing_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_column_values_to_not_be_null",
+          "target": "duration_ms",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_column_values_to_be_between",
+          "target": "duration_ms",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0,
+            "unexpected_percent_total": 0.0,
+            "unexpected_percent_nonmissing": 0.0,
+            "missing_count": 0,
+            "missing_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_column_values_to_not_be_null",
+          "target": "danceability",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_column_values_to_be_between",
+          "target": "danceability",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0,
+            "unexpected_percent_total": 0.0,
+            "unexpected_percent_nonmissing": 0.0,
+            "missing_count": 0,
+            "missing_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_column_values_to_not_be_null",
+          "target": "energy",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_column_values_to_be_between",
+          "target": "energy",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0,
+            "unexpected_percent_total": 0.0,
+            "unexpected_percent_nonmissing": 0.0,
+            "missing_count": 0,
+            "missing_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_column_values_to_not_be_null",
+          "target": "valence",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_column_values_to_be_between",
+          "target": "valence",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0,
+            "unexpected_percent_total": 0.0,
+            "unexpected_percent_nonmissing": 0.0,
+            "missing_count": 0,
+            "missing_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_column_values_to_not_be_null",
+          "target": "acousticness",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_column_values_to_be_between",
+          "target": "acousticness",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0,
+            "unexpected_percent_total": 0.0,
+            "unexpected_percent_nonmissing": 0.0,
+            "missing_count": 0,
+            "missing_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_column_values_to_not_be_null",
+          "target": "explicit_flag",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_column_values_to_be_in_set",
+          "target": "explicit_flag",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0,
+            "unexpected_percent_total": 0.0,
+            "unexpected_percent_nonmissing": 0.0,
+            "missing_count": 0,
+            "missing_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_column_values_to_not_be_null",
+          "target": "track_count",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_column_values_to_be_in_set",
+          "target": "track_count",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0,
+            "unexpected_percent_total": 0.0,
+            "unexpected_percent_nonmissing": 0.0,
+            "missing_count": 0,
+            "missing_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_column_values_to_not_be_null",
+          "target": "recognition_group",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_column_values_to_not_be_null",
+          "target": "artist_grammy_wins_range",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_column_values_to_not_be_null",
+          "target": "popularity_tier",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_column_values_to_be_in_set",
+          "target": "popularity_tier",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0,
+            "unexpected_percent_total": 0.0,
+            "unexpected_percent_nonmissing": 0.0,
+            "missing_count": 0,
+            "missing_percent": 0.0
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-10",
+          "expectation": "expect_column_values_to_be_between",
+          "target": "tempo",
+          "success": true,
+          "observed": {
+            "element_count": 89740,
+            "unexpected_count": 0,
+            "unexpected_percent": 0.0,
+            "unexpected_percent_total": 0.0,
+            "unexpected_percent_nonmissing": 0.0,
+            "missing_count": 157,
+            "missing_percent": 0.17494985513706263
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "rule_id": "DQ-11",
+      "severity": "Warning",
+      "dimension": "Completeness (analytical readiness)",
+      "description": "The Grammy-recognized group is large enough to compare.",
+      "threshold": "At least 1,000 tracks and 2% of tracks.",
+      "requirement": "AR-01 to 03",
+      "status": "PASS",
+      "checks": [
+        {
+          "rule_id": "DQ-11",
+          "expectation": "expect_column_sum_to_be_between",
+          "target": "is_grammy_track",
+          "success": true,
+          "observed": {
+            "observed_value": 8384
+          },
+          "error": null
+        },
+        {
+          "rule_id": "DQ-11",
+          "expectation": "expect_column_mean_to_be_between",
+          "target": "is_grammy_track",
+          "success": true,
+          "observed": {
+            "observed_value": 0.09342545130376644
+          },
+          "error": null
+        }
+      ]
+    },
+    {
+      "rule_id": "DQ-12",
+      "severity": "Informational",
+      "dimension": "Consistency",
+      "description": "Match coverage between the sources is reported.",
+      "threshold": "Share of Grammy artists matched; no blocking threshold.",
+      "requirement": "AR-01 to 03",
+      "status": "PASS",
+      "checks": [
+        {
+          "rule_id": "DQ-12",
+          "expectation": "expect_column_mean_to_be_between",
+          "target": "matched_flag",
+          "success": true,
+          "observed": {
+            "observed_value": 0.31907463989524226
+          },
+          "error": null
+        }
+      ]
+    }
+  ],
+  "gate_passed": true,
+  "blocking_rules": [],
+  "warning_rules": []
+}

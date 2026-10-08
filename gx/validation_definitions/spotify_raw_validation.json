@@ -1,11 +1,11 @@
 {
   "data": {
     "asset": {
-      "id": "f4c2380b-9131-43b2-b6a9-de7ae73d556c",
+      "id": "fb5c9ce2-b74f-4806-a9ab-408f5abe4f64",
       "name": "spotify_raw"
     },
     "batch_definition": {
-      "id": "2c435d39-80ca-499f-9028-877d844b2a3d",
+      "id": "9fd5d686-e9d0-4a08-b8d0-ac5a0189afa7",
       "name": "whole_dataframe"
     },
     "datasource": {

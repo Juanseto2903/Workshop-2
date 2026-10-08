@@ -1,7 +1,7 @@
 {
   "expectations": [
     {
-      "id": "a53107c0-a5c5-4c3b-81e5-c80cdd96f745",
+      "id": "8af4cc0b-0716-4233-9c38-6d0135699c2a",
       "kwargs": {
         "column_set": [
           "year",
@@ -21,7 +21,7 @@
       "type": "expect_table_columns_to_match_set"
     },
     {
-      "id": "d4d398ec-6079-418a-add8-b095bc375fc9",
+      "id": "7a4e96c1-2271-4b92-a06c-739f038c2689",
       "kwargs": {
         "min_value": 4329
       },
@@ -35,7 +35,7 @@
       "type": "expect_table_row_count_to_be_between"
     },
     {
-      "id": "bedfd588-fb64-4746-815b-49d9f48beb13",
+      "id": "ce0abbf3-b3c5-41a4-b21e-256ffb1bb56d",
       "kwargs": {
         "column": "winner"
       },
@@ -49,7 +49,7 @@
       "type": "expect_column_values_to_not_be_null"
     },
     {
-      "id": "747ecea6-d56e-462d-b30d-4f8ab51c6db5",
+      "id": "e1051b39-edd1-45b3-a4ba-ddf7cd9f5b6e",
       "kwargs": {
         "column": "winner",
         "value_set": [
@@ -66,7 +66,7 @@
       "type": "expect_column_values_to_be_in_set"
     },
     {
-      "id": "963141f6-f362-47d8-ad76-9e154b4afa46",
+      "id": "8827efe8-18c0-48da-9f22-849a1637c7c0",
       "kwargs": {
         "column": "artist",
         "mostly": 0.5

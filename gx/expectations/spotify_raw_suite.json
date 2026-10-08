@@ -1,7 +1,7 @@
 {
   "expectations": [
     {
-      "id": "d615e85e-caa1-443b-bd8f-87c4c62b87b0",
+      "id": "7991cf70-884a-46a2-803e-8a4807ddff60",
       "kwargs": {
         "column_set": [
           "track_id",
@@ -31,7 +31,7 @@
       "type": "expect_table_columns_to_match_set"
     },
     {
-      "id": "ab127572-473d-4dad-be81-608e0045f602",
+      "id": "44c011c5-17a8-411e-8c7e-2dc40155b394",
       "kwargs": {
         "min_value": 102600
       },
@@ -45,7 +45,7 @@
       "type": "expect_table_row_count_to_be_between"
     },
     {
-      "id": "cb1401ad-e2a9-42f9-bbe4-c38f2d001cef",
+      "id": "ac3844c8-907e-48c5-9bff-714a0b798fcf",
       "kwargs": {
         "column": "popularity",
         "max_value": 100.0,
@@ -61,7 +61,7 @@
       "type": "expect_column_values_to_be_between"
     },
     {
-      "id": "8a863039-d240-4dd0-917f-c09f1636ab28",
+      "id": "daa69a20-4961-41fb-94e5-95659119fe26",
       "kwargs": {
         "column": "danceability",
         "max_value": 1.0,
@@ -77,7 +77,7 @@
       "type": "expect_column_values_to_be_between"
     },
     {
-      "id": "8a1c4ac9-6112-4a3f-bed4-fbc37ce0400f",
+      "id": "9f6cac60-5356-47c5-b4ed-90a8c3f9ab40",
       "kwargs": {
         "column": "energy",
         "max_value": 1.0,
@@ -93,7 +93,7 @@
       "type": "expect_column_values_to_be_between"
     },
     {
-      "id": "56c95fcb-1cd4-41a2-adec-3f7bcc671718",
+      "id": "ad4e550c-40ad-4b5d-862c-766d61a0a813",
       "kwargs": {
         "column": "valence",
         "max_value": 1.0,
@@ -109,7 +109,7 @@
       "type": "expect_column_values_to_be_between"
     },
     {
-      "id": "eac896d9-d22a-4da4-801e-e58c40bf0de8",
+      "id": "ecfaed0c-34f3-4972-819d-eec0247c30a6",
       "kwargs": {
         "column": "acousticness",
         "max_value": 1.0,
@@ -125,7 +125,7 @@
       "type": "expect_column_values_to_be_between"
     },
     {
-      "id": "8021d63b-51d2-49cc-87ec-1c3ea42538bb",
+      "id": "5a14dacf-c0a9-4066-8fbc-11d0960cf2b1",
       "kwargs": {
         "column": "artists",
         "mostly": 0.999
@@ -140,7 +140,7 @@
       "type": "expect_column_values_to_not_be_null"
     },
     {
-      "id": "4d5dfb65-3888-4b35-9e6b-7a4620579dec",
+      "id": "57db7057-a89a-4558-9f2e-c58b8ef68358",
       "kwargs": {
         "column_list": [
           "track_id",
@@ -158,7 +158,7 @@
       "type": "expect_compound_columns_to_be_unique"
     },
     {
-      "id": "cc0f5279-09a6-4850-9e84-d71aa307c411",
+      "id": "eb5b1185-966f-4234-bc82-9fa133c1b1e3",
       "kwargs": {
         "column": "popularity",
         "mostly": 0.8,
