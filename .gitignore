@@ -9,3 +9,4 @@ gx/uncommitted/
 data/staging/
 data/staging_fail/
 ~$*
+config/airflow.cfg
