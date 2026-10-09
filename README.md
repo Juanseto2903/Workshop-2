@@ -484,7 +484,7 @@ The `.pbix` file is at `docs/dashboard_music_dw.pbix`. Evidence screenshots are 
 
 ### KPI-03 (AR-03): Explicit content by Grammy category group
 
-![KPI-03: Explicit percentage by Grammy category](docs/evidence/dashboard/KPI-03.png)
+![KPI-03: Explicit percentage by Grammy category](docs/evidence/dashboard/KPI-Numero3.png)
 
 | Category group | Pct explicit | Tracks |
 |----------------|--------------|--------|
