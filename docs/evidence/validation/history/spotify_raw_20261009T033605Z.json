@@ -1,10 +1,10 @@
 {
   "gate": "spotify_raw",
   "dag_task": "validate_spotify_raw",
-  "executed_at": "2026-10-09T04:17:42+00:00",
+  "executed_at": "2026-10-09T03:36:05+00:00",
   "datasets": {
     "spotify_raw": {
-      "file": "data\\staging\\spotify_raw.parquet",
+      "file": "data/staging/spotify_raw.parquet",
       "rows": 114000,
       "columns": 21
     }

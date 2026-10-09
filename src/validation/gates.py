@@ -40,28 +40,75 @@ def _get_or_add_batch_definition(asset, name):
     except (LookupError, KeyError):
         return asset.add_batch_definition_whole_dataframe(name)
 
+def _ensure_suite(context, suite_name):
+    """Build the full suite first (with all expectations), then delete any
+    stale version from the store and add the fresh one."""
+    from .suites import build_suite
+
+    # 1. Construir la suite COMPLETA (con expectativas) primero
+    suite = build_suite(suite_name)
+
+    # 2. Borrar cualquier versión vieja
+    try:
+        context.suites.delete(name=suite_name)
+    except Exception:
+        pass
+
+    # 3. Guardar la suite completa
+    return context.suites.add(suite)
+
 
 def setup(context=None) -> dict:
-    """Create or update data source, suites, validation definitions and checkpoints."""
+    """Create or update data source, suites, validation definitions and checkpoints.
+
+    Suites, validation definitions and checkpoints are recreated from scratch on
+    every call (delete-then-add) so that a stale store created in another
+    environment cannot break the GX 1.x update path.
+    """
     import great_expectations as gx
     from great_expectations.checkpoint import UpdateDataDocsAction
 
     context = context or get_context()
     datasource = context.data_sources.add_or_update_pandas(name=DATASOURCE)
+
     checkpoints = {}
     for gate in GATES.values():
         for dataset in gate.datasets:
+            # Data source and batch definition
             asset = _get_or_add_asset(datasource, dataset.name)
             batch_definition = _get_or_add_batch_definition(asset, "whole_dataframe")
-            suite = context.suites.add_or_update(build_suite(dataset.suite))
-            validation = context.validation_definitions.add_or_update(
-                gx.ValidationDefinition(name=f"{dataset.name}_validation",
-                                        data=batch_definition, suite=suite))
-            checkpoints[dataset.name] = context.checkpoints.add_or_update(
-                gx.Checkpoint(name=f"{dataset.name}_checkpoint",
-                              validation_definitions=[validation],
-                              actions=[UpdateDataDocsAction(name="update_data_docs")],
-                              result_format={"result_format": "SUMMARY"}))
+
+            # Suite: delete + add
+            suite = _ensure_suite(context, dataset.suite)
+
+            # Validation definition: delete + add
+            try:
+                context.validation_definitions.delete(
+                    name=f"{dataset.name}_validation")
+            except Exception:
+                pass
+            validation = context.validation_definitions.add(
+                gx.ValidationDefinition(
+                    name=f"{dataset.name}_validation",
+                    data=batch_definition,
+                    suite=suite,
+                )
+            )
+
+            # Checkpoint: delete + add
+            try:
+                context.checkpoints.delete(name=f"{dataset.name}_checkpoint")
+            except Exception:
+                pass
+            checkpoints[dataset.name] = context.checkpoints.add(
+                gx.Checkpoint(
+                    name=f"{dataset.name}_checkpoint",
+                    validation_definitions=[validation],
+                    actions=[UpdateDataDocsAction(name="update_data_docs")],
+                    result_format={"result_format": "SUMMARY"},
+                )
+            )
+
     return checkpoints
 
 
@@ -73,22 +120,26 @@ def _flatten(checkpoint_result):
 def run_gate(gate_name: str) -> GateOutcome:
     """Run one validation gate. Raises DataQualityError if a Critical rule fails.
 
-    A missing Parquet file raises FileNotFoundError: that is an operational failure
-    (transient), not a data-quality failure.
+    Assumes setup() has already been called (once per DAG run). A missing Parquet
+    file raises FileNotFoundError: operational failure, not data quality.
     """
     import pandas as pd
 
     gate = GATES[gate_name]
     context = get_context()
-    checkpoints = setup(context)
 
     results, datasets = [], {}
     for dataset in gate.datasets:
         path = paths.STAGING_DIR / dataset.parquet
         frame = pd.read_parquet(path)
-        datasets[dataset.name] = {"file": os.path.relpath(path, paths.ROOT), "rows": int(len(frame)),
-                                  "columns": int(frame.shape[1])}
-        checkpoint_result = checkpoints[dataset.name].run(batch_parameters={"dataframe": frame})
+        datasets[dataset.name] = {
+            "file": os.path.relpath(path, paths.ROOT),
+            "rows": int(len(frame)),
+            "columns": int(frame.shape[1]),
+        }
+
+        checkpoint = context.checkpoints.get(name=f"{dataset.name}_checkpoint")
+        checkpoint_result = checkpoint.run(batch_parameters={"dataframe": frame})
         results.extend(_flatten(checkpoint_result))
 
     outcome = evaluate_gate(gate_name, results, datasets)

@@ -15,7 +15,6 @@ from __future__ import annotations
 
 import logging
 import os
-from pathlib import Path
 
 import pandas as pd
 
@@ -28,6 +27,7 @@ except ImportError:
     pass
 
 log = logging.getLogger(__name__)
+
 
 def _dw_url() -> str:
     user = os.getenv("WH_USER")
@@ -163,6 +163,31 @@ def _insert_bridge_genre(conn, bridge_genre: pd.DataFrame,
     return inserted
 
 
+def _insert_bridge_grammy_category(conn, bridge_cat: pd.DataFrame,
+                                    track_keys: dict[str, int],
+                                    category_keys: dict[str, int]) -> int:
+    from sqlalchemy import text
+    stmt = text("""
+        INSERT INTO bridge_track_grammy_category
+            (track_key, category_key, grammy_wins)
+        VALUES (:track_key, :category_key, :grammy_wins)
+        ON CONFLICT (track_key, category_key) DO NOTHING
+    """)
+    inserted = 0
+    for _, r in bridge_cat.iterrows():
+        tk = track_keys.get(r["track_id"])
+        ck = category_keys.get(r["category_name"])
+        if tk is None or ck is None:
+            continue
+        conn.execute(stmt, {
+            "track_key": tk,
+            "category_key": ck,
+            "grammy_wins": int(r["grammy_wins"]),
+        })
+        inserted += 1
+    return inserted
+
+
 # --------------------------------------------------------------------------- #
 # Public orchestration
 # --------------------------------------------------------------------------- #
@@ -172,6 +197,7 @@ def run() -> dict:
 
     tracks = _read("prepared_tracks.parquet")
     bridge_genre = _read("bridge_track_genre.parquet")
+    bridge_category = _read("bridge_track_grammy_category.parquet")
     dim_category = _read("dim_grammy_category_prepared.parquet")
 
     engine = _engine()
@@ -185,20 +211,23 @@ def run() -> dict:
             tiers = _tier_keys(conn)
 
             # 2. Wipe fact and bridges (deterministic replace)
-            conn.execute(text("TRUNCATE TABLE bridge_track_grammy_category, "
-                              "bridge_track_genre, fact_track RESTART IDENTITY CASCADE"))
+            conn.execute(text(
+                "TRUNCATE TABLE bridge_track_grammy_category, "
+                "bridge_track_genre, fact_track RESTART IDENTITY CASCADE"))
 
             # 3. Fact
             track_keys = _insert_facts(conn, tracks, recognition, tiers)
 
             # 4. Bridges
-            n_bridge_genre = _insert_bridge_genre(conn, bridge_genre, track_keys, genre_keys)
-            # bridge_track_grammy_category: no category-per-track artifact is
-            # produced yet by the transformation; left empty on purpose.
+            n_bridge_genre = _insert_bridge_genre(
+                conn, bridge_genre, track_keys, genre_keys)
+            n_bridge_category = _insert_bridge_grammy_category(
+                conn, bridge_category, track_keys, category_keys)
 
             # 5. Row counts
             summary = {
-                "fact_track": conn.execute(text("SELECT COUNT(*) FROM fact_track")).scalar(),
+                "fact_track": conn.execute(
+                    text("SELECT COUNT(*) FROM fact_track")).scalar(),
                 "bridge_track_genre": conn.execute(
                     text("SELECT COUNT(*) FROM bridge_track_genre")).scalar(),
                 "bridge_track_grammy_category": conn.execute(
@@ -209,6 +238,7 @@ def run() -> dict:
                     text("SELECT COUNT(*) FROM dim_grammy_category")).scalar(),
                 "fact_tracks_inserted": len(track_keys),
                 "bridge_track_genre_inserted": n_bridge_genre,
+                "bridge_track_grammy_category_inserted": n_bridge_category,
             }
     finally:
         engine.dispose()

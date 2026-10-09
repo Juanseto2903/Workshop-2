@@ -1,22 +1,22 @@
 {
   "data": {
     "asset": {
-      "id": "3c6a93e7-99d0-473b-8e82-1fa80df025e8",
+      "id": "ada8fffb-10a4-45e9-8c81-9beac996fa7b",
       "name": "grammy_artist_match"
     },
     "batch_definition": {
-      "id": "0c096db7-5669-4465-b2f6-a793fdd01943",
+      "id": "50f10ce0-57c5-471a-bb0d-7e87a2cc25a2",
       "name": "whole_dataframe"
     },
     "datasource": {
-      "id": "286f26a2-f0d5-41fd-8713-cd2f15e0c94e",
+      "id": "8d9c715f-9434-43bf-b247-b0797a2281a5",
       "name": "staging_pandas"
     }
   },
-  "id": "238edf2d-0657-4db6-bceb-f88c0d9d37e6",
+  "id": "a1d29905-46fa-4aa3-a127-ad4166c5a24e",
   "name": "grammy_artist_match_validation",
   "suite": {
-    "id": "1e0b122f-24f7-4601-8e50-51ec2a58a368",
+    "id": "5da77091-e648-44f5-9e6c-c817f008a68d",
     "name": "grammy_artist_match_suite"
   }
 }

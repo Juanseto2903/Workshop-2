@@ -6,14 +6,14 @@
       "type": "update_data_docs"
     }
   ],
-  "id": "b554cb7f-7f67-4b25-ab05-8c82ec916cbd",
+  "id": "8eb6e4d8-f18e-4bb2-8295-4f9f40d6d0f8",
   "name": "spotify_raw_checkpoint",
   "result_format": {
     "result_format": "SUMMARY"
   },
   "validation_definitions": [
     {
-      "id": "f53fc688-643f-4570-80ea-0b65407d77e1",
+      "id": "bc1faa8b-35dc-474b-a9d4-d22233ca632e",
       "name": "spotify_raw_validation"
     }
   ]

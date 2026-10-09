@@ -1,15 +1,15 @@
 {
   "gate": "prepared",
   "dag_task": "validate_prepared",
-  "executed_at": "2026-10-09T04:18:18+00:00",
+  "executed_at": "2026-10-09T03:21:42+00:00",
   "datasets": {
     "prepared_tracks": {
-      "file": "data\\staging\\prepared_tracks.parquet",
+      "file": "data/staging/prepared_tracks.parquet",
       "rows": 89740,
       "columns": 17
     },
     "grammy_artist_match": {
-      "file": "data\\staging\\grammy_artist_match.parquet",
+      "file": "data/staging/grammy_artist_match.parquet",
       "rows": 2291,
       "columns": 2
     }

@@ -7,6 +7,7 @@ Reads:  data/staging/spotify_raw.parquet
 Writes: data/staging/prepared_tracks.parquet
         data/staging/grammy_artist_match.parquet
         data/staging/bridge_track_genre.parquet
+        data/staging/bridge_track_grammy_category.parquet
         data/staging/dim_grammy_category_prepared.parquet
 
 This module only reads Parquet and writes Parquet. It does not touch the DW.
@@ -17,7 +18,6 @@ from __future__ import annotations
 import logging
 import re
 import unicodedata
-from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -26,7 +26,7 @@ from . import paths
 
 log = logging.getLogger(__name__)
 
-POPULARITY_QUANTILE = 0.90          # TR-08
+POPULARITY_QUANTILE = 0.90
 GRAMMY_ARTIST_SPLIT = re.compile(
     r"[;,]|\s+&\s+|\s+and\s+|\s+feat\.?\s+|\s+featuring\s+", flags=re.IGNORECASE
 )
@@ -194,10 +194,10 @@ def build_bridge_track_genre(spotify_df: pd.DataFrame) -> pd.DataFrame:
 
 
 # --------------------------------------------------------------------------- #
-# TR-12: Grammy category grouping (simplified Pop / Rock / Rap / Country / Classical / Other)
+# TR-12: Grammy category grouping
 # --------------------------------------------------------------------------- #
 _CATEGORY_RULES = [
-    ("Pop",       re.compile(r"\bpop\b|pop\s|pop\b|pop/", re.IGNORECASE)),
+    ("Pop",       re.compile(r"\bpop\b|pop\s|pop/", re.IGNORECASE)),
     ("Rock",      re.compile(r"rock|metal|punk|grunge", re.IGNORECASE)),
     ("Rap",       re.compile(r"rap|hip[- ]?hop|urban", re.IGNORECASE)),
     ("Country",   re.compile(r"country|bluegrass|americana|folk", re.IGNORECASE)),
@@ -231,6 +231,62 @@ def build_dim_grammy_category(grammy_df: pd.DataFrame) -> pd.DataFrame:
 
 
 # --------------------------------------------------------------------------- #
+# TR-14: bridge_track_grammy_category
+# --------------------------------------------------------------------------- #
+def build_bridge_track_grammy_category(
+    grammy_df: pd.DataFrame,
+    prepared_tracks: pd.DataFrame,
+) -> pd.DataFrame:
+    """One row per (track_id, category_name) linked through any of its artists.
+
+    grammy_wins is the maximum win count of the matching artists in that
+    category. Tracks with no Grammy-winning artist produce no rows.
+    """
+    rows = []
+    for _, r in grammy_df.iterrows():
+        raw_artist = r.get("artist")
+        category = r.get("category")
+        if pd.isna(raw_artist) or pd.isna(category):
+            continue
+        artist_str = str(raw_artist).strip()
+        if artist_str.lower() in VOWS_PLACEHOLDERS:
+            continue
+        for key in _split_grammy_artist(artist_str):
+            rows.append({"artist_key": key,
+                         "category_name": str(category).strip()})
+
+    if not rows:
+        return pd.DataFrame(columns=["track_id", "category_name", "grammy_wins"])
+
+    artist_cat = (
+        pd.DataFrame(rows)
+        .groupby(["artist_key", "category_name"])
+        .size()
+        .reset_index(name="grammy_wins")
+    )
+
+    # Expand the artists of each prepared track
+    expanded = []
+    for _, r in prepared_tracks.iterrows():
+        for raw in str(r["artists"]).split(";"):
+            key = normalize_artist_name(raw)
+            if key:
+                expanded.append({"track_id": r["track_id"], "artist_key": key})
+    if not expanded:
+        return pd.DataFrame(columns=["track_id", "category_name", "grammy_wins"])
+
+    merged = pd.DataFrame(expanded).merge(artist_cat, on="artist_key", how="inner")
+    if merged.empty:
+        return pd.DataFrame(columns=["track_id", "category_name", "grammy_wins"])
+
+    bridge = (
+        merged.groupby(["track_id", "category_name"], as_index=False)["grammy_wins"]
+        .max()
+    )
+    return bridge
+
+
+# --------------------------------------------------------------------------- #
 # Public orchestration
 # --------------------------------------------------------------------------- #
 def _spotify_artist_set(spotify_df: pd.DataFrame) -> set[str]:
@@ -253,17 +309,17 @@ def run() -> dict:
     log.info("Reading %s", grammy_path)
     grammy_df = pd.read_parquet(grammy_path)
 
-    # TR-05 / TR-06: Grammy side
+    # Grammy side
     wins_df = build_grammy_artist_wins(grammy_df)
     spotify_artists = _spotify_artist_set(spotify_df)
     match_df = build_grammy_artist_match(grammy_df, spotify_artists)
 
-    # TR-01..TR-04 / TR-08
+    # Spotify side
     tracks = aggregate_tracks(spotify_df)
     tracks = classify_recognition(tracks, wins_df)
     tracks, cutoff = assign_popularity_tier(tracks)
 
-    # TR-09 / TR-10: explicit_flag and track_count
+    # Explicit flag and track count (TR-09, TR-10)
     tracks["explicit_flag"] = tracks["explicit"].astype(int)
     tracks["track_count"] = 1
 
@@ -275,14 +331,16 @@ def run() -> dict:
         "artist_grammy_wins_range", "popularity_tier", "is_grammy_track",
     ]].copy()
 
-    # Enforce the declared domain of Fact_Track.track_name and album_name
-    # (VARCHAR(500)). Tracks whose names exceed the column width are truncated
-    # in a deterministic way; the rest of the row is preserved.
-    prepared_tracks["track_name"] = prepared_tracks["track_name"].astype(str).str.slice(0, 500)
-    prepared_tracks["album_name"] = prepared_tracks["album_name"].astype(str).str.slice(0, 500)
+    # TR-13: truncate to declared column widths
+    prepared_tracks["track_name"] = (
+        prepared_tracks["track_name"].astype(str).str.slice(0, 500))
+    prepared_tracks["album_name"] = (
+        prepared_tracks["album_name"].astype(str).str.slice(0, 500))
 
     # Bridges and derived category dimension
     bridge_genre = build_bridge_track_genre(spotify_df)
+    bridge_category = build_bridge_track_grammy_category(grammy_df, tracks)
+    # bridge_category = build_bridge_track_grammy_category(grammy_df, prepared_tracks)
     dim_category = build_dim_grammy_category(grammy_df)
 
     # Write Parquet (overwrite: safe to re-run)
@@ -293,6 +351,8 @@ def run() -> dict:
         paths.STAGING_DIR / "grammy_artist_match.parquet", index=False)
     bridge_genre.to_parquet(
         paths.STAGING_DIR / "bridge_track_genre.parquet", index=False)
+    bridge_category.to_parquet(
+        paths.STAGING_DIR / "bridge_track_grammy_category.parquet", index=False)
     dim_category.to_parquet(
         paths.STAGING_DIR / "dim_grammy_category_prepared.parquet", index=False)
 
@@ -304,6 +364,7 @@ def run() -> dict:
         "grammy_artists_total": int(len(match_df)),
         "popularity_cutoff": cutoff,
         "bridge_track_genre_rows": int(len(bridge_genre)),
+        "bridge_track_grammy_category_rows": int(len(bridge_category)),
         "grammy_categories": int(len(dim_category)),
     }
     log.info("Transformation summary: %s", summary)

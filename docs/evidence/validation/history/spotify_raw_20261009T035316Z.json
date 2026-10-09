@@ -1,10 +1,10 @@
 {
   "gate": "spotify_raw",
   "dag_task": "validate_spotify_raw",
-  "executed_at": "2026-10-09T04:17:42+00:00",
+  "executed_at": "2026-10-09T03:53:16+00:00",
   "datasets": {
     "spotify_raw": {
-      "file": "data\\staging\\spotify_raw.parquet",
+      "file": "data/staging/spotify_raw.parquet",
       "rows": 114000,
       "columns": 21
     }
@@ -70,19 +70,19 @@
       "description": "Numeric attributes respect the documented Spotify scales.",
       "threshold": "popularity within 0-100 and the four features within 0-1, in 100% of rows.",
       "requirement": "AR-01, AR-02",
-      "status": "PASS",
+      "status": "FAIL",
       "checks": [
         {
           "rule_id": "DQ-02",
           "expectation": "expect_column_values_to_be_between",
           "target": "popularity",
-          "success": true,
+          "success": false,
           "observed": {
             "element_count": 114000,
-            "unexpected_count": 0,
-            "unexpected_percent": 0.0,
-            "unexpected_percent_total": 0.0,
-            "unexpected_percent_nonmissing": 0.0,
+            "unexpected_count": 1,
+            "unexpected_percent": 0.0008771929824561403,
+            "unexpected_percent_total": 0.0008771929824561403,
+            "unexpected_percent_nonmissing": 0.0008771929824561403,
             "missing_count": 0,
             "missing_percent": 0.0
           },
@@ -232,7 +232,9 @@
       ]
     }
   ],
-  "gate_passed": true,
-  "blocking_rules": [],
+  "gate_passed": false,
+  "blocking_rules": [
+    "DQ-02"
+  ],
   "warning_rules": []
 }

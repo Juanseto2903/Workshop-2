@@ -1,10 +1,10 @@
 {
   "gate": "grammys_raw",
   "dag_task": "validate_grammys_raw",
-  "executed_at": "2026-10-09T04:17:50+00:00",
+  "executed_at": "2026-10-09T03:44:25+00:00",
   "datasets": {
     "grammys_raw": {
-      "file": "data\\staging\\grammys_raw.parquet",
+      "file": "data/staging/grammys_raw.parquet",
       "rows": 4810,
       "columns": 11
     }
