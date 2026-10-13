@@ -84,87 +84,75 @@ WH_PASSWORD=change_me
 ```
 workshop-2/
 │
-├── dags/
-│   └── reliable_music_pipeline.py          # Airflow 3.1.8 DAG (TaskFlow API, 8 tasks)
+├── dags/                                   # DAGs de Apache Airflow
+│   └── reliable_music_pipeline.py
 │
-├── src/
-│   ├── __init__.py
-│   ├── extract.py                          # Extraction to Parquet staging (Spotify + Grammy)
-│   ├── transform.py                        # Transformation and integration (TR-01 to TR-14)
-│   ├── load.py                             # Idempotent load into the DW
-│   ├── load_grammy_source.py               # One-time load of the Grammy CSV into grammy_source
-│   ├── paths.py                            # Project paths
-│   └── validation/
-│       ├── __init__.py
-│       ├── __main__.py                     # CLI: setup, run, mapping, check-contract
-│       ├── rules.py                        # Single source of truth (DQ-01 to DQ-12)
-│       ├── suites.py                       # Builds GX suites from rules.py
-│       ├── gates.py                        # GX context, checkpoints, gate runner
-│       └── evaluate.py                     # Severity policy + evidence writing
+├── data/                                   # Datos fuente versionados
+│   └── raw/
+│       ├── spotify_dataset.csv
+│       └── the_grammy_awards.csv
 │
-├── gx/                                     # Great Expectations project (file-based)
-│   ├── great_expectations.yml
-│   ├── expectations/                       # Saved suites
-│   ├── checkpoints/                        # Saved checkpoints
-│   └── uncommitted/                        # Data Docs and validations
-│
-├── notebooks/
-│   └── data_profiling.ipynb                # Reproducible profiling of both sources
-│
-├── sql/
-│   ├── init_databases.sql                  # Creates grammy_source and music_dw on container start
-│   ├── source_setup.sql                    # grammy_awards table in grammy_source
-│   └── dw_schema.sql                       # DW schema + seeded fixed dimensions
-│
-├── images/                                 
-│   └── Dimensional Modeling.png
-│
-├── docs/
-│   ├── design_document.docx                # Design document (Sections 1 to 13)
-│   ├── dw_model.dbml                       # Source of the dimensional model diagram
-│   ├── dashboard_music_dw.pbix             # Power BI dashboard (3 pages)
+├── docs/                                   # Diseño del proyecto y evidencias
+│   ├── ETL_2026-2_Workshop-2.pdf
+│   ├── Workshop2_Design_Document.docx
+│   ├── dw_model.dbml
 │   └── evidence/
-│       ├── README.md                       # Evidence register (E-01 to E-10)
-│       ├── grammy_source_reconciliation.json
-│       ├── profiling/                      # Profiling results
-│       ├── validation/
-│       │   ├── spotify_raw_latest.json
+│       ├── Airflow-logs/                    # Capturas y log de validación de Airflow
+│       ├── dashboard/                       # Dashboard, consultas y capturas de KPI
+│       ├── profiling/                       # Resultados del perfilamiento de fuentes
+│       ├── reliability/                     # Evidencias de pruebas de confiabilidad
+│       ├── validation/                      # Resultados recientes e históricos de GX
+│       │   ├── history/                     # JSON históricos generados en cada ejecución
+│       │   ├── expectation_rule_mapping.csv
 │       │   ├── grammys_raw_latest.json
 │       │   ├── prepared_latest.json
-│       │   ├── expectation_rule_mapping.csv
-│       │   └── history/                    # Timestamped copies of every run
-│       ├── reliability/                    # Screenshots and logs of Tests A, B, C
-│       └── dashboard/
-│           ├── queries.sql                 # The 3 KPI queries (KPI-01 to KPI-03)
-│           ├── KPI-01.png
-│           ├── KPI-02.png
-│           └── KPI-03.png
+│       │   └── spotify_raw_latest.json
+│       ├── grammy_source_reconciliation.json
+│       ├── Healthy-Containers.png
+│       └── Show-AirflowVersion.png
 │
-├── data/
-│   ├── raw/
-│   │   ├── spotify_dataset.csv             # Spotify source (immutable)
-│   │   └── the_grammy_awards.csv           # Grammy source (immutable)
-│   └── staging/                            # Parquet (regenerated on every run, not versioned)
-│       ├── spotify_raw.parquet
-│       ├── grammys_raw.parquet
-│       ├── prepared_tracks.parquet
-│       ├── grammy_artist_match.parquet
-│       ├── bridge_track_genre.parquet
-│       ├── bridge_track_grammy_category.parquet
-│       └── dim_grammy_category_prepared.parquet
+├── gx/                                     # Configuración y objetos de Great Expectations
+│   ├── checkpoints/                         # Checkpoints para cada conjunto de datos
+│   ├── expectations/                        # Suites de expectativas de calidad
+│   ├── plugins/custom_data_docs/styles/     # Estilos personalizados para Data Docs
+│   ├── validation_definitions/              # Definiciones de validación
+│   ├── .gitignore
+│   └── great_expectations.yml
 │
-├── logs/                                   # Airflow logs (not versioned)
-├── config/                                 # Airflow configuration (not versioned)
-├── plugins/                                # Airflow plugins (empty)
+├── images/                                 # Imágenes usadas en la documentación
+│   └── Dimensional Modeling.png
 │
-├── requirements.txt                        # Python dependencies
-├── Dockerfile                              # Airflow image (build: .)
-├── docker-compose.yaml                     # Airflow 3.1.8 + PostgreSQL + Redis
-├── .env                                    # Secrets (NOT versioned)
-├── .env.example                            # Template (versioned)
-├── .gitignore                              # Excludes .env, logs, staging, __pycache__, etc.
-└── README.md                               # Main repository documentation
+├── notebooks/                              # Análisis exploratorio reproducible
+│   └── data_profiling.ipynb
+│
+├── sql/                                    # Inicialización y esquema de bases de datos
+│   ├── dw_schema.sql
+│   ├── init_databases.sql
+│   └── source_setup.sql
+│
+├── src/                                    # Código de extracción, transformación y carga
+│   ├── validation/                          # Reglas, suites y ejecución de controles GX
+│   ├── __init__.py
+│   ├── extract.py
+│   ├── load.py
+│   ├── load_grammy_source.py
+│   ├── paths.py
+│   └── transform.py
+│
+├── tests/                                  # Pruebas automatizadas
+│   ├── __init__.py
+│   └── test_validation_rules.py
+│
+├── .env.example                            # Plantilla de variables de entorno
+├── .gitignore
+├── Dockerfile
+├── docker-compose.yaml
+├── README.md
+├── requirements-dev.txt
+└── requirements.txt
 ```
+
+Los archivos de staging, logs, configuraciones locales y resultados temporales de Great Expectations se generan localmente y se excluyen del repositorio.
 
 ---
 
@@ -369,11 +357,7 @@ The one-track difference with respect to the 89,741 distinct `track_id` in profi
 
 The DAG `reliable_music_pipeline` runs on a manual schedule and has **eight tasks**: two independent extract-and-validate branches converge at the transformation, followed by a prepared gate that protects the load.
 
-```
-setup_gx ──┬──► extract_spotify ──► validate_spotify_raw ──┐
-           │                                               ├──► transform_and_integrate ──► validate_prepared ──► load_dw
-           └──► extract_grammys ──► validate_grammys_raw ──┘
-```
+![Airflow DAG design Image](images/Airflow%20DAG%20Design.png)
 
 | Task | Depends on | Purpose |
 |------|-----------|---------|
@@ -435,6 +419,18 @@ The full pipeline was executed with the profiled batch. All eight DAG tasks comp
 | `validate_prepared` | **skipped** | Depends on the transformation. |
 | `load_dw` | **skipped** | Depends on the prepared gate. |
 
+### Image 1
+
+Visual Output
+
+![Test B1 (controlled critical failure)](docs/evidence/Airflow-logs/Test%20B%20(controlled%20critical%20failure).png)
+
+### Image 2
+
+Console Logs Output
+
+![Test B2 (controlled critical failure)](docs/evidence/Airflow-logs/Test%20B%20(controlled%20critical%20failure)%20Logs.png)
+
 Evidence: Airflow Grid view screenshot, task log of `validate_spotify_raw` (contains `Critical rule(s) failed: DQ-02`), and `docs/evidence/validation/spotify_raw_latest.json`. The Data Warehouse was not modified.
 
 ### 13.3 Test C: Safe rerun
@@ -447,6 +443,10 @@ Evidence: Airflow Grid view screenshot, task log of `validate_spotify_raw` (cont
 | After rerun | 89,740 | 113,549 |
 
 The duplicate check on `fact_track.track_id` after the rerun returned **0 rows**. The load is idempotent.
+
+![Test C Image 1 (safe rerun)](docs/evidence/reliability/Counting%20from%20music_dw.png)
+
+![Test C Image 2 (safe rerun)](docs/evidence/reliability/Test%20C%20(safe%20rerun).png)
 
 ---
 
