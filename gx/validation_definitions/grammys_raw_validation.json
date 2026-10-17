@@ -1,11 +1,11 @@
 {
   "data": {
     "asset": {
-      "id": "e10b4c23-a2c0-4328-94a1-f923d05930d2",
+      "id": "58c50080-88cc-44cd-8220-7d44181c0c14",
       "name": "grammys_raw"
     },
     "batch_definition": {
-      "id": "d0c21bf3-ab25-46ba-99df-5d7ee791d49c",
+      "id": "0d9bc6de-2769-4ca1-bfff-5c372149db23",
       "name": "whole_dataframe"
     },
     "datasource": {
@@ -13,10 +13,10 @@
       "name": "staging_pandas"
     }
   },
-  "id": "f82c446b-94f3-4b9e-8f00-2582ceb09486",
+  "id": "bd189268-e7c7-48de-80b6-a7977d61991e",
   "name": "grammys_raw_validation",
   "suite": {
-    "id": "ef4913a0-f3a7-4ba4-a640-c6d11890215d",
+    "id": "cd5fee0a-9a64-4bd1-b6e6-1fac61758930",
     "name": "grammys_raw_suite"
   }
 }

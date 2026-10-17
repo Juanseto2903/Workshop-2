@@ -6,14 +6,14 @@
       "type": "update_data_docs"
     }
   ],
-  "id": "8b9a5854-cd30-444e-a97c-d5ad66fbcfa3",
+  "id": "f342dd9f-3143-4c19-8df4-2e03aa668525",
   "name": "grammys_raw_checkpoint",
   "result_format": {
     "result_format": "SUMMARY"
   },
   "validation_definitions": [
     {
-      "id": "f82c446b-94f3-4b9e-8f00-2582ceb09486",
+      "id": "bd189268-e7c7-48de-80b6-a7977d61991e",
       "name": "grammys_raw_validation"
     }
   ]

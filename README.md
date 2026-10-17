@@ -84,25 +84,25 @@ WH_PASSWORD=change_me
 ```
 workshop-2/
 │
-├── dags/                                   # DAGs de Apache Airflow
+├── dags/                                   # Apache Airflow DAGs
 │   └── reliable_music_pipeline.py
 │
-├── data/                                   # Datos fuente versionados
+├── data/                                   # Versioned source data
 │   └── raw/
 │       ├── spotify_dataset.csv
 │       └── the_grammy_awards.csv
 │
-├── docs/                                   # Diseño del proyecto y evidencias
+├── docs/                                   # Project design and evidence
 │   ├── ETL_2026-2_Workshop-2.pdf
 │   ├── Workshop2_Design_Document.docx
 │   ├── dw_model.dbml
 │   └── evidence/
-│       ├── Airflow-logs/                    # Capturas y log de validación de Airflow
-│       ├── dashboard/                       # Dashboard, consultas y capturas de KPI
-│       ├── profiling/                       # Resultados del perfilamiento de fuentes
-│       ├── reliability/                     # Evidencias de pruebas de confiabilidad
-│       ├── validation/                      # Resultados recientes e históricos de GX
-│       │   ├── history/                     # JSON históricos generados en cada ejecución
+│       ├── Airflow-logs/                    # Airflow validation screenshots and logs
+│       ├── dashboard/                       # Dashboard, queries, and KPI captures
+│       ├── profiling/                       # Source profiling results
+│       ├── reliability/                     # Reliability test evidence
+│       ├── validation/                      # Recent and historical GX results
+│       │   ├── history/                     # Historical JSON files generated on each run
 │       │   ├── expectation_rule_mapping.csv
 │       │   ├── grammys_raw_latest.json
 │       │   ├── prepared_latest.json
@@ -111,27 +111,27 @@ workshop-2/
 │       ├── Healthy-Containers.png
 │       └── Show-AirflowVersion.png
 │
-├── gx/                                     # Configuración y objetos de Great Expectations
-│   ├── checkpoints/                         # Checkpoints para cada conjunto de datos
-│   ├── expectations/                        # Suites de expectativas de calidad
-│   ├── plugins/custom_data_docs/styles/     # Estilos personalizados para Data Docs
-│   ├── validation_definitions/              # Definiciones de validación
+├── gx/                                     # Great Expectations configuration and objects
+│   ├── checkpoints/                         # Checkpoints for each dataset
+│   ├── expectations/                        # Quality expectation suites
+│   ├── plugins/custom_data_docs/styles/     # Custom Data Docs styles
+│   ├── validation_definitions/              # Validation definitions
 │   ├── .gitignore
 │   └── great_expectations.yml
 │
-├── images/                                 # Imágenes usadas en la documentación
+├── images/                                 # Images used in the documentation
 │   └── Dimensional Modeling.png
 │
-├── notebooks/                              # Análisis exploratorio reproducible
+├── notebooks/                              # Reproducible exploratory analysis
 │   └── data_profiling.ipynb
 │
-├── sql/                                    # Inicialización y esquema de bases de datos
+├── sql/                                    # Database initialization and schema
 │   ├── dw_schema.sql
 │   ├── init_databases.sql
 │   └── source_setup.sql
 │
-├── src/                                    # Código de extracción, transformación y carga
-│   ├── validation/                          # Reglas, suites y ejecución de controles GX
+├── src/                                    # Extraction, transformation, and load code
+│   ├── validation/                          # GX rules, suites, and validation execution
 │   ├── __init__.py
 │   ├── extract.py
 │   ├── load.py
@@ -139,11 +139,11 @@ workshop-2/
 │   ├── paths.py
 │   └── transform.py
 │
-├── tests/                                  # Pruebas automatizadas
+├── tests/                                  # Automated tests
 │   ├── __init__.py
 │   └── test_validation_rules.py
 │
-├── .env.example                            # Plantilla de variables de entorno
+├── .env.example                            # Environment variable template
 ├── .gitignore
 ├── Dockerfile
 ├── docker-compose.yaml
@@ -152,7 +152,7 @@ workshop-2/
 └── requirements.txt
 ```
 
-Los archivos de staging, logs, configuraciones locales y resultados temporales de Great Expectations se generan localmente y se excluyen del repositorio.
+The staging files, logs, local configuration files, and temporary Great Expectations results are generated locally and excluded from the repository.
 
 ---
 

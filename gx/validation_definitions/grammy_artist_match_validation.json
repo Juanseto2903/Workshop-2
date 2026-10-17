@@ -1,11 +1,11 @@
 {
   "data": {
     "asset": {
-      "id": "ada8fffb-10a4-45e9-8c81-9beac996fa7b",
+      "id": "d94ccf97-82b8-43c5-8342-86b7a9b9a0c1",
       "name": "grammy_artist_match"
     },
     "batch_definition": {
-      "id": "50f10ce0-57c5-471a-bb0d-7e87a2cc25a2",
+      "id": "1fda1036-5709-4326-8b17-a431cc430bd6",
       "name": "whole_dataframe"
     },
     "datasource": {
@@ -13,10 +13,10 @@
       "name": "staging_pandas"
     }
   },
-  "id": "a1d29905-46fa-4aa3-a127-ad4166c5a24e",
+  "id": "edcf2919-4290-4fb7-9bb1-2e9843b077ed",
   "name": "grammy_artist_match_validation",
   "suite": {
-    "id": "5da77091-e648-44f5-9e6c-c817f008a68d",
+    "id": "c298cb92-6610-4e54-bce4-5a7dfaeb6915",
     "name": "grammy_artist_match_suite"
   }
 }
