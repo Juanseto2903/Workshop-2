@@ -87,35 +87,35 @@ fluent_datasources:
     assets:
       spotify_raw:
         type: dataframe
-        id: 121aac72-b69d-4013-96f4-6b764fb3c59a
+        id: 055a595a-40c2-4ba6-8fb7-573d09caea31
         batch_metadata: {}
         batch_definitions:
           whole_dataframe:
-            id: aaf07c10-6058-4221-ae36-5a004322732a
+            id: 4cc51f76-3281-445e-9403-d4bbef66cd0d
             partitioner:
       grammys_raw:
         type: dataframe
-        id: e10b4c23-a2c0-4328-94a1-f923d05930d2
+        id: 58c50080-88cc-44cd-8220-7d44181c0c14
         batch_metadata: {}
         batch_definitions:
           whole_dataframe:
-            id: d0c21bf3-ab25-46ba-99df-5d7ee791d49c
+            id: 0d9bc6de-2769-4ca1-bfff-5c372149db23
             partitioner:
       prepared_tracks:
         type: dataframe
-        id: 9d5fe432-ac94-4f13-bf49-a0e9c4351039
+        id: 4ee6c174-2b0a-4379-89db-7b8ab39a8680
         batch_metadata: {}
         batch_definitions:
           whole_dataframe:
-            id: 4758eb70-b09e-465f-b161-d54d645f8fcb
+            id: 8c73ed1f-1511-4cee-a89b-959db5b40dac
             partitioner:
       grammy_artist_match:
         type: dataframe
-        id: ada8fffb-10a4-45e9-8c81-9beac996fa7b
+        id: d94ccf97-82b8-43c5-8342-86b7a9b9a0c1
         batch_metadata: {}
         batch_definitions:
           whole_dataframe:
-            id: 50f10ce0-57c5-471a-bb0d-7e87a2cc25a2
+            id: 1fda1036-5709-4326-8b17-a431cc430bd6
             partitioner:
 analytics_enabled:
 data_context_id: 7d5c43da-dcff-4ad5-bd45-a285f289ac91

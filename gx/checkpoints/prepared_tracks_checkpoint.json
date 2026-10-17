@@ -6,14 +6,14 @@
       "type": "update_data_docs"
     }
   ],
-  "id": "0532138f-2922-4618-bc33-a38645630b35",
+  "id": "2ce37f92-152e-4665-b49e-a922286adcdd",
   "name": "prepared_tracks_checkpoint",
   "result_format": {
     "result_format": "SUMMARY"
   },
   "validation_definitions": [
     {
-      "id": "f175a29b-3950-4522-aad2-0340fae50fe8",
+      "id": "38f3ce7e-1b65-44b7-b4d3-144bb1911ee8",
       "name": "prepared_tracks_validation"
     }
   ]
